@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link href="style/style.css" rel="stylesheet" >
+    <script src="https://code.jquery.com/jquery-3.5.1.js"   integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="   crossorigin="anonymous"></script>
+    <title>title</title>
+  </head>
+  <body>
+      
+<div id="wrapper">
+    <p align="center"><b>Search:</b></p>
+    <div id="form1">
+        <form name="form">
+                <b>Title:</b> <input type="text" id="title" name="title"/><br/><br/>
+                <label for="type"><b>Type:</b> </label>
+                <select id="type" name="type">
+                    <option value="Movie">Movie</option>
+                    <option value="Series">Series</option>
+                    <option value="Episode">Episode</option>
+                </select> <br/><br/>
+                <input type="button" id="bsearch" value="Search" onclick="search()" />
+        </form>
+    </div>
+    <div id="movies">
+
+    </div>
+    <div id="pagination" >
+
+    </div>
+    <div id="fullinfo">
+        
+    </div>
+</div>
+    <script>
+        var page=1;
+        var str='',str1='';
+        function search(){
+            // searched void
+            $('#fullinfo').empty();
+            var searched = document.form.title.value;
+            var type=document.form.type.value;
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", `http://www.omdbapi.com/?s=${searched}&apikey=76f5d5e9&type=${type}&page=${page}`, true);
+            xhttp.send();
+            xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                str=JSON.parse(this.responseText);
+                let str_movies = '';
+                let str_pages='';
+                $('#movies').empty();
+                if(str.Response=='False') 
+                    $('#movies').append(`<p align="center">${type} not found!</p>`);
+                else{
+                    for(const key in str.Search){
+                    str_movies = '<div class="movie" id="' + str.Search[key].Title + `">
+                    <div id="poster"><img src="${str.Search[key].Poster}"></div>
+                    <div id="inf">${type}<p><b>${str.Search[key].Title}</b></p>
+                    <p><b>${str.Search[key].Year}</b></p>
+                    <button id="${str.Search[key].imdbID}" onclick="details(str.Search[${key}].imdbID);">Details</button></div>
+                    </div>`;
+                    //variable inside function
+                    $('#movies').append(str_movies);
+                        }
+                        $('#pagination').empty();
+                    if(page!=1) 
+                        str_pages+=`<button onclick="page=${page-1};search();">&lt;&lt;</button>&nbsp;&nbsp;`
+                    for(i=page;i<page+10;i++)
+                    {
+                        str_pages+=`<button onclick="page=${i};search();">${i}</button>&nbsp;&nbsp;`
+                    }
+                    str_pages+=`<button onclick="page=${page+10};search();">&gt;&gt;</button>`
+                    $('#pagination').append(str_pages);
+                    $('#pagination').append("<br/><br/><br/>");
+                }   
+            };
+        }
+        }
+    function details(id){
+        $('#fullinfo').empty();
+        $('#fullinfo').append(" <div id='movieimg'></div>");
+        $('#fullinfo').append("<div id='movieinfo'></div>");  
+        var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", `http://www.omdbapi.com/?i=${id}&apikey=76f5d5e9&plot=full`, true);
+            xhttp.send();
+            xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                str1=JSON.parse(this.responseText);
+                //$('#wrapper').append("<p><b>Film info:</b></p>")
+                $('#movieimg').append(`<img src="${str1.Poster}"/>`);
+                $('#movieinfo').append(`<p><b>Title:</b>${str1.Title}</p>
+                <p><b>Plot:</b>${str1.Plot}</p>
+                <p><b>Realeased:</b>${str1.Released}</p><p><b>Genre:</b>  ${str1.Genre}</p>
+                <p><b>Country:</b>${str1.Country}</p><p><b>Director:</b>${str1.Director}</p>
+                <p><b>Writer:</b>${str1.Writer}</p><p><b>Actors:</b>${str1.Actors}</p>
+                <p><b>Awards:</b>${str1.Awards}</p>
+                `);
+            }
+        
+        }   
+    }
+    </script>
+  </body>
+</html>

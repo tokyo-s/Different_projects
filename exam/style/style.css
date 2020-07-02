@@ -1,0 +1,115 @@
+#wrapper{
+    width:1132px;
+    margin: auto;
+}
+#myweather{
+color: #1cbbbb;
+font-size: 25px;
+}
+#first{
+    padding: 10px;
+    width: 1132px;
+    height: 5%;
+    background-color: #F6F6F6;
+}
+#form{
+    float: right;
+    margin-right: 20px;
+}
+#second{
+    background-color: black;
+    color:white ;
+    width: 1132px;
+    height: 50px;
+    padding-left: 20px;
+}
+button{
+    height: 50px;
+    width: 100px;
+    background-color: black;
+    color: white;
+    float: left;
+    border: 0px;
+    border-left: 1px solid gray;
+}
+#third{
+    background-color:#D7D7D7;
+    height: 1070px;
+    width: 1152px;
+    position: relative;
+}
+.icon{
+    height: 120px;
+    width: 120px;
+}
+#intro{
+    width: 842px;
+    font-weight: bold;
+    font-size: 30px;
+    left: 120px;
+}
+#idk{
+    height: 300px;
+}
+body{
+    margin: 0;
+}
+.intro{
+    text-align: center;
+    width: 33%;
+    height: 100%;
+    font-size: 25px;
+    float: left;
+}
+.txt{
+    color: #1cbbbb;
+    font-size: 25px;
+    font-weight: bold;
+}
+.part{
+    background-color: #eeeeee;
+    width: 1000px;
+    height: 383px;
+    position: absolute;
+    margin: 40px;
+    left: 40px;
+}
+#middle{
+height: 400px;
+top: 300px;
+width: 960px;
+padding: 20px;
+}
+#last{
+    height: 180px;
+    padding: 20px;
+    top: 770px;
+    width: 960px;
+    }
+th,td{
+    width: 80px;
+    font-weight: bold;
+}
+.daily{
+    width: 150px;
+    height: 300px;
+    float: left;
+    padding: 20px;
+    background-color: rgb(231, 231, 231);
+    text-align: center;
+    margin: 5px;
+}
+.nearby{
+    width:440px;
+    float: left;
+    margin: 10px;
+    padding: 10px;
+    background-color: rgb(231, 231, 231);
+}
+.mini{
+    width: 60px;
+    height: 60px;
+    right: 70px;
+    position: absolute;
+    top: -4px;
+}
